@@ -13,12 +13,12 @@ stage = 0
 
 # 以下为可修改变量
 rounds = 100 # 游戏次数
-games = 50 # 局数
+games = 500 # 局数
 bet_unit = 500 # 砝码大小
 init_amount = 5000.0 # 本金
 threshold = INFINITE #2*init_amount # 阈值
 hand = HANDS[1] # 压桩压弦
-strategy = [1,1,2,4] # 押注策略
+strategy = [1,2,4,8,16] # 押注策略
 
 # 统计用
 hand_cnt = 0
