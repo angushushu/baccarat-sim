@@ -4,7 +4,7 @@ import numpy as np
 
 rounds = 1000
 games = 500
-amount = 30000
+init_amount = 5000
 OUTCOME = ['Player wins', 'Banker wins', 'Tie']
 HANDS = ['player', 'banker']
 hand = HANDS[0]
@@ -13,8 +13,9 @@ stage = 0
 amount_records = np.zeros([rounds,games],dtype=int)
 game = Game()
 bet_unit = 500
-threshold = 40000
+threshold = 2*init_amount
 mean_amount = np.zeros(games,dtype=float)
+amount = init_amount
 
 plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(np.linspace(0, 1, rounds))))
 
@@ -32,7 +33,7 @@ for r in range(0,rounds):
         amount += payback
 
         # print('amount:',amount)
-        if amount <= bet_unit:
+        if amount < bet_unit:
             print('Broken!')
             for i in range(g+1,games):
                 amount_records[r][i] = amount
@@ -53,7 +54,7 @@ for r in range(0,rounds):
 
     plt.plot(np.arange(games), amount_records[r], '-', alpha=0.3+0.7*(r/rounds), linewidth=1) # x,y axis
     print('Final amount:', amount)
-    amount = 30000
+    amount = init_amount
 
 print('amount_records:')
 print(amount_records)
