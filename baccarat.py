@@ -81,11 +81,13 @@ class Game:
         # print('Player has final score of\t' + str(player_score))
         # print('Banker has final score of\t' + str(banker_score))
 
-        if (banker_score < player_score and hand == self.HANDS[0])\
-            or (banker_score > player_score and hand == self.HANDS[1]):
+        if (banker_score < player_score and hand == self.HANDS[0]):
             return self.OUTCOME[0], 2*bet
-        elif (banker_score < player_score and hand == self.HANDS[1])\
-            or (banker_score > player_score and hand == self.HANDS[0]):
+        elif (banker_score > player_score and hand == self.HANDS[1]):
+            return self.OUTCOME[1], 2*bet
+        elif (banker_score < player_score and hand == self.HANDS[1]):
+            return self.OUTCOME[0], 0
+        elif (banker_score > player_score and hand == self.HANDS[0]):
             return self.OUTCOME[1], 0
         else:
             return self.OUTCOME[2], bet
