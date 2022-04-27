@@ -44,11 +44,15 @@ class Game:
             #     return self.OUTCOME[banker_score > player_score]
             # else:
             #     return self.OUTCOME[2]
-            if (banker_score < player_score and hand == self.HANDS[0])\
-                or (banker_score > player_score and hand == self.HANDS[1]):
+            if (banker_score < player_score and hand == self.HANDS[0]):
                 return self.OUTCOME[0], 2*bet
-            elif (banker_score < player_score and hand == self.HANDS[1])\
-                or (banker_score > player_score and hand == self.HANDS[0]):
+            elif (banker_score > player_score and hand == self.HANDS[1]):
+                if banker_score == 6:
+                    return self.OUTCOME[1], 1.5*bet
+                return self.OUTCOME[1], 2*bet
+            elif (banker_score < player_score and hand == self.HANDS[1]):
+                return self.OUTCOME[0], 0
+            elif (banker_score > player_score and hand == self.HANDS[0]):
                 return self.OUTCOME[1], 0
             else:
                 return self.OUTCOME[2], bet
@@ -84,6 +88,8 @@ class Game:
         if (banker_score < player_score and hand == self.HANDS[0]):
             return self.OUTCOME[0], 2*bet
         elif (banker_score > player_score and hand == self.HANDS[1]):
+            if banker_score == 6:
+                return self.OUTCOME[1], 1.5*bet
             return self.OUTCOME[1], 2*bet
         elif (banker_score < player_score and hand == self.HANDS[1]):
             return self.OUTCOME[0], 0
