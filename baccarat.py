@@ -5,7 +5,7 @@ class Game:
     CARDS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     VALUE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0]
     OUTCOME = ['Player wins', 'Banker wins', 'Tie']
-
+    HANDS = ['player', 'banker']
     
     def __init__(self):
         print('Game started')
@@ -17,7 +17,7 @@ class Game:
             total_value += self.VALUE[self.CARDS.index(card)]
         return total_value % 10
 
-    def play(self, bet):
+    def play(self, hand, bet):
         # Inclusive range function
         irange = lambda start, end: range(start, end + 1)
         """Returns the winner"""
@@ -44,9 +44,11 @@ class Game:
             #     return self.OUTCOME[banker_score > player_score]
             # else:
             #     return self.OUTCOME[2]
-            if banker_score < player_score:
+            if (banker_score < player_score and hand == self.HANDS[0])\
+                or (banker_score > player_score and hand == self.HANDS[1]):
                 return self.OUTCOME[0], 2*bet
-            elif banker_score > player_score:
+            elif (banker_score < player_score and hand == self.HANDS[1])\
+                or (banker_score > player_score and hand == self.HANDS[0]):
                 return self.OUTCOME[1], 0
             else:
                 return self.OUTCOME[2], bet
@@ -79,9 +81,11 @@ class Game:
         # print('Player has final score of\t' + str(player_score))
         # print('Banker has final score of\t' + str(banker_score))
 
-        if banker_score < player_score:
+        if (banker_score < player_score and hand == self.HANDS[0])\
+            or (banker_score > player_score and hand == self.HANDS[1]):
             return self.OUTCOME[0], 2*bet
-        elif banker_score > player_score:
+        elif (banker_score < player_score and hand == self.HANDS[1])\
+            or (banker_score > player_score and hand == self.HANDS[0]):
             return self.OUTCOME[1], 0
         else:
             return self.OUTCOME[2], bet
