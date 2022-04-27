@@ -12,8 +12,8 @@ game = Game()
 stage = 0
 
 # 以下为可修改变量
-rounds = 1000 # 游戏次数
-games = 500 # 局数
+rounds = 10000 # 游戏次数
+games = 5000 # 局数
 bet_unit = 500 # 砝码大小
 init_amount = 5000 # 本金
 threshold = INFINITE #2*init_amount # 阈值
@@ -31,7 +31,7 @@ mean_amount = np.zeros(games,dtype=float)
 plt.gca().set_prop_cycle(plt.cycler('color', plt.cm.jet(np.linspace(0, 1, 25))))
 
 for r in range(0,rounds):
-    print('round:',r)
+    print('-----round {}-----'.format(r))
     amount = init_amount
     stage = 0
     bet = strategy[stage]
@@ -46,12 +46,12 @@ for r in range(0,rounds):
 
         # print('amount:',amount)
         if amount < bet_unit:
-            print('Broken!')
+            # print('Broken with {}'.format(amount))
             for i in range(g+1,games):
                 amount_records[r][i] = amount
             break
         if amount >= threshold:
-            print('Rich!')
+            # print('Reached threshold with {}'.format(amount))
             for i in range(g+1,games):
                 amount_records[r][i] = amount
             break
